@@ -61,7 +61,7 @@ const ResultScreen = ({ score, totalQuestions, onRestart }) => {
             </div>
 
             {/* 점수 표시 */}
-            <div className="p-8">
+            <div className="p-8 text-center">
               <div className="text-center mb-8">
                 <div className="text-6xl font-bold text-gray-800 mb-2">
                   {score} / {totalQuestions}
@@ -104,15 +104,15 @@ const ResultScreen = ({ score, totalQuestions, onRestart }) => {
                   onClick={onRestart}
                   className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
                 >
-                  🔄 같은 문제로 다시 도전하기
+                  🔄 다시 도전하기
                 </button>
                 
-                <button
+                {/* <button
                   onClick={() => window.location.reload()}
                   className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
                 >
                   🆕 새로운 문제로 시작하기
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -144,6 +144,10 @@ const ResultScreen = ({ score, totalQuestions, onRestart }) => {
               <p className="text-gray-600 text-sm leading-relaxed">
                 매일 10분씩 연습하면 한국어 숫자 읽기 실력이 크게 향상됩니다. 
                 시계를 볼 때마다 한국어로 시간을 읽어보는 습관을 만들어보세요!
+              </p>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">오류 보고</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                dmsgk2323@naver.com
               </p>
             </div>
           </div>

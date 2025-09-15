@@ -81,12 +81,12 @@ const QuizCard = ({
           <h2 className="text-3xl md:text-4xl font-bold text-white leading-relaxed">
             {question}
           </h2>
-          <p className="text-blue-100 text-lg mt-2">정확한 한국어로 시간을 읽어보세요</p>
+          <p className="text-blue-100 text-lg mt-2">정확한 한국어로 읽어보세요</p>
         </div>
 
         {/* 보기 카드들 */}
-        <div className="p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="p-8 flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 max-w-[1000px] ">
             {shuffledOptions.map((option, index) => (
               <button
                 key={index}
@@ -94,7 +94,7 @@ const QuizCard = ({
                 disabled={selectedAnswer !== null}
                 className={`relative p-6 rounded-2xl text-left transition-all duration-300 disabled:cursor-not-allowed ${getOptionStyle(index)}`}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between max-w-md">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold text-lg flex items-center justify-center mr-4 shadow-lg">
                       {String.fromCharCode(65 + index)}
@@ -152,7 +152,7 @@ const QuizCard = ({
         <div className="bg-white rounded-2xl shadow-lg p-4 inline-block">
           <div className="flex items-center space-x-2 text-gray-600">
             <span className="text-2xl">💡</span>
-            <span className="text-sm font-medium">팁: 시계를 보고 자연스럽게 읽어보세요!</span>
+            <span className="text-sm font-medium">팁: 정답이 여러 개인 경우도 있어요!</span>
           </div>
         </div>
       </div>

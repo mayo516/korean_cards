@@ -20,9 +20,9 @@ function App() {
         
         // 10개 문제 랜덤 선택
         const shuffled = allQuestions.sort(() => Math.random() - 0.5)
-        const selectedQuestions = shuffled.slice(0, 10)
+        // const selectedQuestions = shuffled.slice(0, 10)
         
-        setQuestions(selectedQuestions)
+        setQuestions(shuffled)
         setIsLoading(false)
       } catch (error) {
         console.error('문제를 불러오는 중 오류가 발생했습니다:', error)
@@ -129,10 +129,7 @@ function App() {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">한</span>
-              </div>
+            <div className="flex items-center space-x-4">          
               <h1 className="text-xl font-bold text-gray-800">한국어 숫자 퀴즈</h1>
             </div>
             <div className="flex items-center space-x-6">
