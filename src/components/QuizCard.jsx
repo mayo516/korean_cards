@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const QuizCard = ({ 
   question, 
@@ -9,6 +10,7 @@ const QuizCard = ({
   onNextQuestion,
   isLastQuestion 
 }) => {
+  const { t } = useTranslation()
   const [shuffledOptions, setShuffledOptions] = useState([])
   const [optionMapping, setOptionMapping] = useState({})
 
@@ -59,7 +61,7 @@ const QuizCard = ({
         <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
           {question}
         </h2>
-        <p className="text-gray-600 text-sm">정확한 한국어로 읽어보세요</p>
+        <p className="text-gray-600 text-sm">{t('quizInstruction')}</p>
       </div>
 
       {/* 보기 */}
@@ -86,7 +88,7 @@ const QuizCard = ({
             onClick={onNextQuestion}
             className="px-6 py-3 backdrop-blur-lg bg-indigo-500/70 hover:bg-indigo-600/70 text-white rounded-xl font-semibold transition-colors shadow-md border border-white/30"
           >
-            {isLastQuestion ? '🎉 결과 보기' : '다음 문제'}
+            {isLastQuestion ? t('showResult') : t('nextQuestion')}
           </button>
         </div>
       )}
@@ -96,14 +98,14 @@ const QuizCard = ({
         <div className="mt-6">
           {optionMapping[selectedAnswer] === correctAnswer ? (
             <div className="p-4 rounded-xl border border-green-300/60 backdrop-blur-md bg-green-100/30 text-green-700 text-center">
-              <p className="font-bold">정답이에요 🎉</p>
-              <p className="text-sm">잘하셨습니다! 계속 이렇게 해보세요.</p>
+              <p className="font-bold">{t('correctFeedbackTitle')}</p>
+              <p className="text-sm">{t('correctFeedbackText')}</p>
             </div>
           ) : (
             <div className="p-4 rounded-xl border border-red-300/60 backdrop-blur-md bg-red-100/30 text-red-700 text-center">
-              <p className="font-bold">아쉬워요 💡</p>
+              <p className="font-bold">{t('wrongFeedbackTitle')}</p>
               <p className="text-sm">
-                정답은 <span className="font-semibold">{options[correctAnswer]}</span> 입니다.
+                {t('wrongFeedbackText', { answer: options[correctAnswer] })}
               </p>
             </div>
           )}
