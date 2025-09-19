@@ -10,70 +10,50 @@ const QuizCard = ({
   onNextQuestion,
   isLastQuestion 
 }) => {
-  const { t } = useTranslation()
-  const [shuffledOptions, setShuffledOptions] = useState([])
-  const [optionMapping, setOptionMapping] = useState({})
 
-  useEffect(() => {
-    const shuffled = [...options].sort(() => Math.random() - 0.5)
-    setShuffledOptions(shuffled)
-    const mapping = {}
-    shuffled.forEach((option, newIndex) => {
-      mapping[newIndex] = options.indexOf(option)
-    })
-    setOptionMapping(mapping)
-  }, [question, options])
+  const { t } = useTranslation();
 
-  const handleOptionClick = (shuffledIndex) => {
-    if (selectedAnswer !== null) return
-    onAnswerSelect(shuffledIndex, optionMapping[shuffledIndex])
+  const handleOptionClick = (index) => {
+    if (selectedAnswer !== null) return;
+    onAnswerSelect(index, correctAnswer);
   }
 
-  const getOptionStyle = (shuffledIndex) => {
-    const base =
-      "p-4 rounded-xl border backdrop-blur-md bg-white/30 transition-colors text-left w-full text-gray-800 font-medium shadow-sm min-h-[50px] text-[20px]"
+  const getOptionStyle = (index) => {
+    const base = "p-4 rounded-xl border backdrop-blur-md bg-white/30 transition-colors text-left w-full text-gray-800 font-medium shadow-sm min-h-[50px] text-[20px]";
+    
+    if (selectedAnswer === null) return base + " hover:border-indigo-400 hover:bg-white/40";
 
-    if (selectedAnswer === null) {
-      return base + " hover:border-indigo-400 hover:bg-white/40"
-    }
-
-    const originalIndex = optionMapping[shuffledIndex]
-    const isSelected = selectedAnswer === shuffledIndex
-    const isCorrect = originalIndex === correctAnswer
-
-    if (isSelected) {
-      return isCorrect
+    if (index === selectedAnswer) {
+      return index === correctAnswer
         ? base + " border-green-400 bg-green-200/30 text-green-800"
-        : base + " border-red-400 bg-red-200/30 text-red-800"
+        : base + " border-red-400 bg-red-200/30 text-red-800";
     }
 
-    if (isCorrect) {
-      return base + " border-green-400 bg-green-200/30 text-green-800"
+    if (index === correctAnswer) {
+      return base + " border-green-400 bg-green-200/30 text-green-800";
     }
 
-    return base + " border-gray-300 bg-gray-100/20 text-gray-400"
+    return base + " border-gray-300 bg-gray-100/20 text-gray-400";
   }
 
   return (
     <div className="max-w-[80%] mx-auto text-center">
       {/* 문제 카드 */}
-     <div className="min-h-[200px] backdrop-blur-lg bg-white/30 border border-white/40 shadow-lg p-6 mb-6 flex flex-col gap-[20px] justify-center">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 text-[50px] ">
-          {question}
-        </h2>
+      <div className="min-h-[200px] backdrop-blur-lg bg-white/30 border border-white/40 shadow-lg p-6 mb-6 flex flex-col gap-[20px] justify-center">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 text-[50px]">{question}</h2>
         <p className="text-gray-600 text-sm">{t('quizInstruction')}</p>
       </div>
 
       {/* 보기 */}
       <div className="space-y-3 mb-6">
-        {shuffledOptions.map((option, index) => (
+        {options.map((option, index) => (
           <button
             key={index}
             onClick={() => handleOptionClick(index)}
             disabled={selectedAnswer !== null}
             className={getOptionStyle(index)}
           >
-            <span className="mr-2 font-semibold text-indigo-600  text-[20px] ">
+            <span className="mr-2 font-semibold text-indigo-600 text-[20px]">
               {String.fromCharCode(65 + index)}.
             </span>
             {option}
@@ -87,7 +67,6 @@ const QuizCard = ({
           <button
             onClick={onNextQuestion}
             className="bg-[#9abf7f] shadow-[0_4px_0_#87a86f] text-white font-bold inline-block text-center rounded-[10px] border-0 h-[50px] w-[100px] m-[10px] appearance-none"
-
           >
             {isLastQuestion ? t('showResult') : t('nextQuestion')}
           </button>
@@ -97,7 +76,7 @@ const QuizCard = ({
       {/* 피드백 */}
       {selectedAnswer !== null && (
         <div className="mt-6">
-          {optionMapping[selectedAnswer] === correctAnswer ? (
+          {selectedAnswer === correctAnswer ? (
             <div className="p-4 rounded-xl border border-green-300/60 backdrop-blur-md bg-green-100/30 text-green-700 text-center">
               <p className="font-bold">{t('correctFeedbackTitle')}</p>
               <p className="text-sm">{t('correctFeedbackText')}</p>
@@ -105,15 +84,13 @@ const QuizCard = ({
           ) : (
             <div className="p-4 rounded-xl border border-red-300/60 backdrop-blur-md bg-red-100/30 text-red-700 text-center">
               <p className="font-bold">{t('wrongFeedbackTitle')}</p>
-              <p className="text-sm">
-                {t('wrongFeedbackText', { answer: options[correctAnswer] })}
-              </p>
+              <p className="text-sm">{t('wrongFeedbackText', { answer: options[correctAnswer] })}</p>
             </div>
           )}
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default QuizCard
+export default QuizCard;

@@ -109,7 +109,7 @@ function App() {
   }
 
   const currentQuestion = questions[currentQuestionIndex]
-  const shuffledOptions = shuffleOptions(currentQuestion.options)
+  // const shuffledOptions = shuffleOptions(currentQuestion.options)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
@@ -157,7 +157,7 @@ function App() {
 
         <QuizCard
           question={currentQuestion.question}
-          options={shuffledOptions}
+          options={currentQuestion.options}
           correctAnswer={currentQuestion.answer}
           selectedAnswer={selectedAnswer}
           onAnswerSelect={handleAnswerSelect}
