@@ -31,7 +31,7 @@ const QuizCard = ({
 
   const getOptionStyle = (shuffledIndex) => {
     const base =
-      "p-4 rounded-xl border backdrop-blur-md bg-white/30 transition-colors text-left w-full text-gray-800 font-medium shadow-sm"
+      "p-4 rounded-xl border backdrop-blur-md bg-white/30 transition-colors text-left w-full text-gray-800 font-medium shadow-sm min-h-[50px]"
 
     if (selectedAnswer === null) {
       return base + " hover:border-indigo-400 hover:bg-white/40"
@@ -86,7 +86,8 @@ const QuizCard = ({
         <div className="text-center">
           <button
             onClick={onNextQuestion}
-            className="px-6 py-3 backdrop-blur-lg bg-indigo-500/70 hover:bg-indigo-600/70 text-white rounded-xl font-semibold transition-colors shadow-md border border-white/30"
+            className="bg-[#9abf7f] shadow-[0_4px_0_#87a86f] text-white font-bold inline-block text-center rounded-[10px] border-0 h-[50px] w-[100px] m-[10px] appearance-none"
+
           >
             {isLastQuestion ? t('showResult') : t('nextQuestion')}
           </button>
