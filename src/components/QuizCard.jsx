@@ -31,7 +31,7 @@ const QuizCard = ({
 
   const getOptionStyle = (shuffledIndex) => {
     const base =
-      "p-4 rounded-xl border backdrop-blur-md bg-white/30 transition-colors text-left w-full text-gray-800 font-medium shadow-sm min-h-[50px]"
+      "p-4 rounded-xl border backdrop-blur-md bg-white/30 transition-colors text-left w-full text-gray-800 font-medium shadow-sm min-h-[50px] text-[20px]"
 
     if (selectedAnswer === null) {
       return base + " hover:border-indigo-400 hover:bg-white/40"
@@ -57,8 +57,8 @@ const QuizCard = ({
   return (
     <div className="max-w-[80%] mx-auto text-center">
       {/* 문제 카드 */}
-     <div className="min-h-[200px] backdrop-blur-lg bg-white/30 border border-white/40  shadow-lg p-6 mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+     <div className="min-h-[200px] backdrop-blur-lg bg-white/30 border border-white/40 shadow-lg p-6 mb-6 flex flex-col gap-[20px] justify-center">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 text-[50px] ">
           {question}
         </h2>
         <p className="text-gray-600 text-sm">{t('quizInstruction')}</p>
@@ -73,7 +73,7 @@ const QuizCard = ({
             disabled={selectedAnswer !== null}
             className={getOptionStyle(index)}
           >
-            <span className="mr-2 font-semibold text-indigo-600">
+            <span className="mr-2 font-semibold text-indigo-600  text-[20px] ">
               {String.fromCharCode(65 + index)}.
             </span>
             {option}
