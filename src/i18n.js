@@ -11,9 +11,9 @@ i18n
     fallbackLng: "en",
     supportedLngs: ["ko", "en"],
     interpolation: { escapeValue: false },
-    backend: {
-      loadPath: "/locales/{{lng}}/translation.json"
-    }
+   backend: {
+    loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json`
+  }
   });
 
 export default i18n;

@@ -18,18 +18,22 @@ function App() {
   useEffect(() => {
     const loadQuestions = async () => {
       try {
-        const response = await fetch('/questions.json')
-        const allQuestions = await response.json()
+        const url = `${import.meta.env.BASE_URL}questions.json`
+        const res = await fetch(url)
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const allQuestions = await res.json()
         const shuffled = allQuestions.sort(() => Math.random() - 0.5)
         setQuestions(shuffled)
-      } catch (error) {
-        console.error(t('errorTitle'), error)
+      } catch (err) {
+        console.error('questions load failed', err)
+        setError(err)
       } finally {
         setIsLoading(false)
       }
     }
     loadQuestions()
-  }, [t])
+  }, []) 
+
 
   const shuffleOptions = (options) => [...options].sort(() => Math.random() - 0.5)
 
